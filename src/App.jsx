@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import Input from './components/Input'
+import CountyInformation from './components/CountyInformation'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Input stateChanger={setState} countyChanger={setCounty}/>
       <h1>{county.value}</h1>
       <h1>{state.value}</h1>
+      <CountyInformation />
 
     </div>
   )
