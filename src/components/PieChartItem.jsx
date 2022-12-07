@@ -11,9 +11,31 @@ class PieChartItem extends React.Component{
     }
 
 
+    
+
+  CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+       return (
+       <div
+          className="custom-tooltip"
+          style={{
+             backgroundColor: "#ffff",
+             padding: "5px",
+             border: "1px solid #cccc"
+          }}
+       >
+          <label>{`${payload[0].name} : ${payload[0].value}%`}</label>
+       </div>
+    );
+ }
+ return null;
+};
+
+
 render(){
    //Have 9 colors
-   const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#FF8042", "#AF19FF"];
+   const COLORS = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6"];
+   
         return(
          
             
@@ -36,6 +58,7 @@ render(){
                     />
                 ))}
             </Pie>
+            <Tooltip content={<this.CustomTooltip />} />
             <Legend />
             </PieChart>
 

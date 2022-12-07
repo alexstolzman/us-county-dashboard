@@ -5,7 +5,7 @@ import CountyInformation from './components/CountyInformation'
 import './App.css'
 
 function App() {
-  const [county, setCounty] = useState("cuming")
+  const [county, setCounty] = useState("")
   const [state, setState] = useState("")
 
   CountyInformation.defaultProps = {
