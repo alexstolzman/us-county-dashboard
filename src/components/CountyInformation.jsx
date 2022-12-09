@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 function CountyInformation({county, state}){
    const [race, setRace] = useState([]);
    const [age, setAge] = useState([]);
+   const [countyData, setCountyData]=useState([]);
 
 
 
@@ -52,9 +53,12 @@ function CountyInformation({county, state}){
          data2.push({name: "70-79", value: arr[0].age["70-74"]+arr[0].age["75-79"]*100})
          data2.push({name: "80+", value: arr[0].age["80-84"]+arr[0].age["85+"]*100})
 
+         console.log(arr[0])
+      setCountyData(arr[0])
+
       }
      
-
+      
       setRace(data)
       setAge(data2)
     },[county]);
@@ -71,8 +75,8 @@ function CountyInformation({county, state}){
     return(
 
       
-        <div className="absolute left-0">
-        <div className="float-left">
+        <div className="flex flex-row">
+        <div className="flex">
          <h1>{county.value} County, {state.value}</h1>
             <label>
                 Race Distribution
@@ -81,7 +85,7 @@ function CountyInformation({county, state}){
             </label>
       
         </div>
-        <div >
+        <div className="flex">
         <label>
             Age Distribution
             <PieChartItem pieData={age} key={county.value}/>
@@ -89,8 +93,35 @@ function CountyInformation({county, state}){
             </label> 
 
         </div>
+        <div>
+        <label>
+            Education
+            <PieChartItem pieData={[]} key={county.value}/>
+
+            </label> 
+
+        </div>
          <div>
             <h3>General Statistics</h3>
+            <table>
+               <tr>
+                  <th>Area</th>
+                  <th>Total Population</th>
+                  <th>Male Population</th>
+                  <th>Female Population</th>
+                  <th>Life Expectancy</th>
+                  <th>Average Income</th>
+                  <th>Poverty Rate</th>
+               </tr>
+               <tr>
+                  <td>{}</td>
+                  <td>{countyData.male+countyData.female}</td>
+                  <td>{countyData.male}</td>
+                  <td>{countyData.female}</td>
+                  <td>{}</td>
+               </tr>
+            </table>
+
          </div>
 
         </div>

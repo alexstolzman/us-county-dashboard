@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 function Input({stateChanger, countyChanger}){
         const [state, setState] = useState({value: "Alabama", label: "AL"});
-        const [county, setCounty] = useState("");
+        const [county, setCounty] = useState("Autauga");
         const [counties, setCounties] = useState([]);
 
     useEffect(() => {
