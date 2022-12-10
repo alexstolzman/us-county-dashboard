@@ -10,7 +10,6 @@ function Input({stateChanger, countyChanger}){
         const [counties, setCounties] = useState([]);
 
     useEffect(() => {
-        // Update the document title using the browser API
         var countiesState=[]
         
         Counties.forEach((item)=>{

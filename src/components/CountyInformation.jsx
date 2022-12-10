@@ -9,6 +9,10 @@ function CountyInformation({county, state}){
    const [age, setAge] = useState([]);
    const [countyData, setCountyData]=useState([]);
 
+   useEffect(() => {
+      console.log(county)
+      
+   },[])
 
 
     useEffect(() => {
@@ -17,10 +21,7 @@ function CountyInformation({county, state}){
       if(county.value){
          str=county.value.toString().toLowerCase()+" county"
       }
-      else{
 
-      }
-      console.log(state.label)
       //let arr=CountyData.find(item=>item.name==str).race
       let data=[], data2=[]
 
@@ -77,7 +78,15 @@ function CountyInformation({county, state}){
       
         <div className="flex flex-row">
         <div className="flex">
-         <h1>{county.value} County, {state.value}</h1>
+        {(() => {
+              if (county.value!=""){
+                  return (
+                     <h1>{county.value} County, {state.value}</h1>
+                  )
+              }
+              return null;
+            })()}
+            
             <label>
                 Race Distribution
                 <PieChartItem pieData={race} key={county.value}/>
@@ -114,11 +123,13 @@ function CountyInformation({county, state}){
                   <th>Poverty Rate</th>
                </tr>
                <tr>
-                  <td>{}</td>
+                  <td>{countyData["area (km^2)"]} km^2</td>
                   <td>{countyData.male+countyData.female}</td>
                   <td>{countyData.male}</td>
                   <td>{countyData.female}</td>
-                  <td>{}</td>
+                  <td>{countyData["life-expectancy"]}</td>
+                  <td>${countyData.avg_income}</td>
+                  <td>{countyData["poverty-rate"]}</td>
                </tr>
             </table>
 

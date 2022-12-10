@@ -5,12 +5,8 @@ import CountyInformation from './components/CountyInformation'
 import './App.css'
 
 function App() {
-  const [county, setCounty] = useState("")
-  const [state, setState] = useState("")
-
-  CountyInformation.defaultProps = {
-    county: 'cuming'
-  };
+  const [county, setCounty] = useState("Autauga")
+  const [state, setState] = useState({"value": "Alabama", "label": "AL"})
 
   //Get county and state from input, pass to CountyInformation
   return (
