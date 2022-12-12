@@ -1,5 +1,4 @@
 import React from "react";
-import { Pie } from "recharts";
 import PieChartItem from "./PieChartItem"
 import CountyData from '../data/countyData.json'
 import { useState, useEffect } from 'react';
@@ -9,21 +8,21 @@ function CountyInformation({county, state}){
    const [age, setAge] = useState([]);
    const [countyData, setCountyData]=useState([]);
 
-   useEffect(() => {
-      console.log(county)
-      
-   },[])
-
 
     useEffect(() => {
-      let str=""
+      let str="", data=[], data2=[]
+
+      setAge([])
       setRace([])
+      setCountyData([])
+
       if(county.value){
          str=county.value.toString().toLowerCase()+" county"
       }
+      if(state.label=="AK" && county.value){
+         str=county.value.toString().toLowerCase()
+      }
 
-      //let arr=CountyData.find(item=>item.name==str).race
-      let data=[], data2=[]
 
       let arr = CountyData.filter(item => {
          if (item.name==str && item.state==state.label) {
@@ -54,83 +53,77 @@ function CountyInformation({county, state}){
          data2.push({name: "70-79", value: arr[0].age["70-74"]+arr[0].age["75-79"]*100})
          data2.push({name: "80+", value: arr[0].age["80-84"]+arr[0].age["85+"]*100})
 
-         console.log(arr[0])
       setCountyData(arr[0])
+      
 
       }
      
       
       setRace(data)
       setAge(data2)
-    },[county]);
-
-    useEffect(() => {
-      //console.log(race)
-    },[race]);
-
-
- 
-
+    },[county, state]);
 
 
     return(
 
       
-        <div className="flex flex-row">
-        <div className="flex">
-        {(() => {
-              if (county.value!=""){
+        <div className="py-8">
+                {(() => {
+              if (county.value!=undefined && state.label!="AK"){
                   return (
                      <h1>{county.value} County, {state.value}</h1>
                   )
               }
+              else{
+               return(
+                  <h1>{county.value}, {state.value}</h1>
+               )
+              }
               return null;
             })()}
+
+        <div className="flex justify-center py-8">
             
             <label>
                 Race Distribution
                 <PieChartItem pieData={race} key={county.value}/>
 
             </label>
-      
-        </div>
-        <div className="flex">
-        <label>
+
+            <label>
             Age Distribution
             <PieChartItem pieData={age} key={county.value}/>
 
             </label> 
-
+      
         </div>
-        <div>
-        <label>
-            Education
-            <PieChartItem pieData={[]} key={county.value}/>
+    
 
-            </label> 
-
-        </div>
          <div>
-            <h3>General Statistics</h3>
-            <table>
+            <h3 className="text-2xl font-bold py-3">General Statistics</h3>
+            <table className="table-auto border-separate border border-green-900">
+               <thead>
                <tr>
-                  <th>Area</th>
-                  <th>Total Population</th>
-                  <th>Male Population</th>
-                  <th>Female Population</th>
-                  <th>Life Expectancy</th>
-                  <th>Average Income</th>
-                  <th>Poverty Rate</th>
+                  <th className="border-solid border-2 border-indigo-600">Area</th>
+                  <th className="border border-slate-400border-spacing-20">Total Population</th>
+                  <th className="border border-slate-400border-spacing-20">Male Population</th>
+                  <th className="border border-slate-400border-spacing-20">Female Population</th>
+                  <th className="border border-slate-400border-spacing-20">Life Expectancy</th>
+                  <th className="border border-slate-400border-spacing-20">Average Income</th>
+                  <th className="border border-slate-400border-spacing-20">Poverty Rate</th>
                </tr>
+               </thead>
+               <tbody>
                <tr>
-                  <td>{countyData["area (km^2)"]} km^2</td>
-                  <td>{countyData.male+countyData.female}</td>
-                  <td>{countyData.male}</td>
-                  <td>{countyData.female}</td>
-                  <td>{countyData["life-expectancy"]}</td>
-                  <td>${countyData.avg_income}</td>
-                  <td>{countyData["poverty-rate"]}</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData["area (km^2)"]} km^2</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData.male+countyData.female}</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData.male}</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData.female}</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData["life-expectancy"]}</td>
+                  <td className="border border-slate-400border-spacing-20">${countyData.avg_income}</td>
+                  <td className="border border-slate-400border-spacing-20">{countyData["poverty-rate"]}</td>
                </tr>
+               </tbody>
             </table>
 
          </div>

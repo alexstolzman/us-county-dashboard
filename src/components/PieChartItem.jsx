@@ -1,6 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import '../PieChartItem.css'
+
 
 class PieChartItem extends React.Component{
     constructor(props){
@@ -36,7 +38,7 @@ render(){
          
             
         <div>
-            <PieChart width={730} height={300}>
+            <PieChart width={400} height={350}>
                 <Pie
                 data={this.state.pieData}
                 color="#000000"

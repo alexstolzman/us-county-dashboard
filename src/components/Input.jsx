@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 function Input({stateChanger, countyChanger}){
         const [state, setState] = useState({value: "Alabama", label: "AL"});
-        const [county, setCounty] = useState("Autauga");
+        const [county, setCounty] = useState("");
         const [counties, setCounties] = useState([]);
 
     useEffect(() => {
@@ -29,15 +29,14 @@ function Input({stateChanger, countyChanger}){
    
 
     return(
-        <div>
-            <h2>Choose County</h2>
-            <form>
-                <label>
+        <div className="py-8">
+            <form className="">
+                <label className="font-bold ">
                     County
                     <Select value={county} options={counties} onChange={e=>setCounty(e)} />
                     
                 </label>
-                <label>
+                <label className="font-bold">
                     State
                     <Select value={state} options={States} onChange={e=>setState(e)} />
                 </label>
